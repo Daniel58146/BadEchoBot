@@ -1,0 +1,65 @@
+import discord
+from discord.ext import commands
+import random
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f'Hai fatto l\'accesso come {bot.user}')
+
+@bot.command()
+async def pericoli(ctx, tot=1):
+    for i in range(tot):
+        sceltapericoli = random.choice(lista_pericoli)
+        await ctx.send(sceltapericoli)
+        lista_pericoli.remove(sceltapericoli)
+
+lista_pericoli = [
+    "Le plastiche nell'oceano si decompongono in piccoli pezzi, che poi i pesci mangiano e arrivano fino al nostro stomaco.",
+    "Alcune specie di pesci potrebbero estinguersi per via delle plastiche nell'oceano",
+    "Alcune specie animali potrebbero estinguersi perché il loro habitat è stato degradato"
+]
+
+@bot.command()
+async def plastica(ctx):
+    sceltap = random.choice(cose_plastica)
+    await ctx.send(sceltap)
+    cose_plastica.remove(sceltap)
+
+cose_plastica = [
+    "Portapenne o Portaoggetti: Ritaglia bottiglie di plastica e decorale per creare portapenne, portaoggetti o vasi per piccole piante.",
+    "Flauto di Cannuccia:Taglia la cannuccia a diverse lunghezze.Sovrapponi le cannuccie di diverse lunghezze in modo che siano allineate.Fissa le cannuccie insieme con nastro adesivo o colla. Suona soffiando attraverso le estremità delle cannuccie come faresti con un flauto.",
+    "Decorazioni per la Casa: Crea decorazioni murali o mobile utilizzando plastica riciclata, dipingendola o tagliandola in forme interessanti.",
+    "Vasi per Piante Sospesi: Taglia il fondo di bottiglie di plastica e utilizzale come vasi per piante sospesi. Puoi dipingerle o decorarle per un tocco personalizzato."
+]
+
+@bot.command()
+async def carta(ctx):
+    sceltac = random.choice(cose_carta)
+    await ctx.send(sceltac)
+    cose_carta.remove(sceltac)
+
+cose_carta = [
+    "Cornici per Foto di Cartone: Ritaglia cartone per creare cornici personalizzate per le tue foto. Decora con colori, washi tape, stoffa o carta colorata.",
+    "Puzzle di Cartone: Disegna o stampa un'immagine su cartone e ritaglialo in pezzi per creare un puzzle personalizzato.",
+    "Libri Pop-up: Crea libri pop-up utilizzando carta e cartoncino. Aggiungi elementi tridimensionali alle pagine per rendere la storia più interessante."
+    
+]
+
+@bot.command()
+async def aiuto(ctx):
+    await ctx.send(lista_commandi)
+
+lista_commandi = [
+    "aiuto: lista dei commandi",
+    "pericoli: manda dei pericoli causati dal inquinamento",
+    "plastica: manda delle idee per riutilizzare la plastica",
+    "carta: manda delle idee per riutilizzare la carta o il cartone"  
+]    
+    
+
+bot.run("YOURTOKENHERE")
